@@ -10,7 +10,9 @@
   const I = {
     menu: S('<path d="M3 6h18M3 12h18M3 18h18"/>'),
     back: S('<path d="M15 5l-7 7 7 7"/>', 'stroke-width="2.2"'),
-    plusCircle: S('<circle cx="12" cy="12" r="10" fill="#fff" stroke="none"/><path d="M12 7v10M7 12h10" stroke="#3d7f9e" stroke-width="2.4"/>'),
+    plusCircle: S('<rect x="2" y="2" width="20" height="20" rx="7" fill="#5a2650" stroke="none"/><path d="M12 7.5v9M7.5 12h9" stroke="#fff" stroke-width="2"/>'),
+    plus: S('<path d="M12 5v14M5 12h14"/>', 'stroke-width="2.2"'),
+    grid: S('<rect x="3.5" y="3.5" width="7" height="7" rx="2"/><rect x="13.5" y="3.5" width="7" height="7" rx="2"/><rect x="3.5" y="13.5" width="7" height="7" rx="2"/><rect x="13.5" y="13.5" width="7" height="7" rx="2"/>'),
     search: S('<circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/>', 'stroke-width="2"'),
     filter: S('<path d="M3 6h18M6 12h12M9 18h6"/>'),
     users: S('<circle cx="12" cy="6.5" r="2.5"/><circle cx="5.5" cy="9" r="2"/><circle cx="18.5" cy="9" r="2"/><path d="M8 20v-5a4 4 0 0 1 8 0v5M2 20v-3.5A3 3 0 0 1 5.5 13.5c.8 0 1.5.3 2 .7M22 20v-3.5a3 3 0 0 0-3.5-3c-.8 0-1.5.3-2 .7M2 20h20"/>'),
@@ -18,7 +20,7 @@
     tools: S('<path d="M14.7 6.3a4 4 0 0 1 5-5l-2.6 2.6.9 2.1 2.1.9L22.7 4.3a4 4 0 0 1-5 5L8.5 18.5a2.1 2.1 0 0 1-3-3z"/><path d="M4 2l3 3v2H5L2 4zM13 15l6 6a1.4 1.4 0 0 0 2-2l-6-6"/>'),
     chart: S('<rect x="3" y="12" width="3" height="9"/><rect x="8.5" y="9" width="3" height="12"/><rect x="14" y="13" width="3" height="8"/><rect x="19" y="10" width="2.5" height="11"/><path d="M4.5 7l5-3 5 4 6-4"/><circle cx="4.5" cy="7" r="1"/><circle cx="9.5" cy="4" r="1"/><circle cx="14.5" cy="8" r="1"/><circle cx="20.5" cy="4" r="1"/>'),
     help: S('<circle cx="12" cy="12" r="10"/><path d="M9.5 9a2.5 2.5 0 0 1 5 .5c0 1.7-2.5 2-2.5 3.5"/><circle cx="12" cy="17" r=".6" fill="currentColor"/>'),
-    settings: S('<path d="M3 6h18M3 12h18M3 18h18"/><circle cx="8" cy="6" r="2" fill="#f9f9f9"/><circle cx="15" cy="12" r="2" fill="#f9f9f9"/><circle cx="10" cy="18" r="2" fill="#f9f9f9"/>'),
+    settings: S('<path d="M3 6h18M3 12h18M3 18h18"/><circle cx="8" cy="6" r="2" fill="currentColor"/><circle cx="15" cy="12" r="2" fill="currentColor"/><circle cx="10" cy="18" r="2" fill="currentColor"/>'),
     heart: S('<circle cx="12" cy="12" r="11" fill="currentColor" stroke="none"/><path d="M12 17s-5-3-5-6.3A2.7 2.7 0 0 1 12 9.3a2.7 2.7 0 0 1 5 1.4C17 14 12 17 12 17z" fill="#fff" stroke="none"/>'),
     chev: S('<path d="M9 5l7 7-7 7"/>', 'stroke-width="2"'),
     calendar: S('<rect x="3" y="4.5" width="18" height="17" rx="2"/><path d="M3 9.5h18M8 2.5v4M16 2.5v4"/><text x="12" y="19" font-size="7.5" text-anchor="middle" fill="currentColor" stroke="none" font-family="Roboto,Arial">31</text>'),
@@ -45,7 +47,7 @@
     cake: S('<path d="M4 21h16v-7a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2zM4 16c2 1.5 4 1.5 5.3 0 1.4 1.5 4 1.5 5.4 0 1.3 1.5 3.3 1.5 5.3 0M12 12V8M12 5.5c.8-.8.8-1.7 0-2.8-.8 1.1-.8 2 0 2.8z"/>'),
     truck: S('<path d="M2 6h12v10H2zM14 9h4l3 3.5V16h-7"/><circle cx="6" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/>'),
   };
-  const EMPTY_ART = `<svg viewBox="0 0 170 150" fill="none"><circle cx="50" cy="80" r="38" fill="#e3f0f1"/><g fill="#c9cace"><circle cx="58" cy="52" r="2.4"/><circle cx="66" cy="82" r="2.4"/></g><path d="M41 85l7 7M48 85l-7 7" stroke="#c9cace" stroke-width="3" stroke-linecap="round"/><path d="M66 6h66l16 16v116a4 4 0 0 1-4 4H66a4 4 0 0 1-4-4V10a4 4 0 0 1 4-4z" fill="#fff" stroke="#c9cace" stroke-width="5" stroke-linejoin="round"/><path d="M130 6v18h18" stroke="#c9cace" stroke-width="5" stroke-linejoin="round"/><circle cx="145" cy="82" r="22" fill="#fff" stroke="#c9cace" stroke-width="5"/><path d="M145 70v14" stroke="#c9cace" stroke-width="5" stroke-linecap="round"/><circle cx="145" cy="93" r="3" fill="#c9cace"/></svg>`;
+  const EMPTY_ART = `<svg viewBox="0 0 160 160" fill="none"><circle cx="80" cy="84" r="66" fill="#f3e8ef"/><circle cx="80" cy="84" r="48" fill="#faf6f0"/><rect x="68" y="24" width="24" height="16" rx="4" fill="#d8b46e"/><rect x="72" y="38" width="16" height="12" fill="#b88a3e"/><rect x="44" y="50" width="72" height="84" rx="22" fill="#fff" stroke="#5a2650" stroke-width="4"/><path d="M56 104c10 8 38 8 48 0v10a14 14 0 0 1-14 14H70a14 14 0 0 1-14-14z" fill="#f3e8ef"/><rect x="62" y="74" width="36" height="20" rx="6" fill="#f8efdc" stroke="#b88a3e" stroke-width="2"/><path d="M128 36l3 7 7 3-7 3-3 7-3-7-7-3 7-3zM30 58l2 5 5 2-5 2-2 5-2-5-5-2 5-2z" fill="#d8b46e"/></svg>`;
 
   /* ---------------- Utilitários ---------------- */
   const $ = (s, el = document) => el.querySelector(s);
@@ -170,7 +172,7 @@
       <a class="drawer-profile" href="#/config">
         <div class="avatar">${esc(initials(e.nome))}</div>
         <div class="info"><b>${esc(e.nome || 'Sua Empresa')}</b><small>${esc(e.email || 'Toque para configurar')}</small></div>
-        <span style="color:#6b6f78">${I.chev}</span>
+        <span>${I.chev}</span>
       </a>
       <div class="drawer-group drawer-desktop-only">
         ${it('#/dashboard', 'dash', 'Painel', 'dashboard')}
@@ -200,8 +202,11 @@
   $('#scrim').addEventListener('click', closeDrawer);
 
   /* ---------------- Bottom nav / FAB ---------------- */
-  const navIcons = { dashboard: 'dash', pedidos: 'orders', agenda: 'calendar', financas: 'money' };
-  $$('#bottomnav a').forEach((a) => (a.innerHTML = I[navIcons[a.dataset.tab]]));
+  const navItems = { dashboard: ['dash', 'Início'], pedidos: ['ordersLine', 'Pedidos'], agenda: ['calendar', 'Agenda'], financas: ['money', 'Finanças'] };
+  $$('#bottomnav a').forEach((a) => { const [ic, lb] = navItems[a.dataset.tab]; a.innerHTML = `${I[ic]}<span>${lb}</span>`; });
+  $('#navMore').innerHTML = `${I.grid}<span>Mais</span>`;
+  $('#navMore').addEventListener('click', openDrawer);
+  $('#fab').innerHTML = `${I.plus}<span class="fab-label">Novo registro</span>`;
   $('#fab').addEventListener('click', () => {
     openModal(`<h3>Adicionar <button data-close>${I.close}</button></h3>
       <div class="action-list">
@@ -1012,7 +1017,7 @@
   function viewRelatorios() {
     return {
       title: 'Relatórios', back: '#/pedidos',
-      html: `<div class="grid grid-2 lg-3">${Object.entries(REPORTS).map(([k, r]) => `<a class="report-card" href="#/relatorio/${k}"><div class="h">${I[r.icon]}<b>${r.t}</b></div><p>${r.d}</p></a>`).join('')}</div>`,
+      html: `<div class="grid grid-2 lg-3">${Object.entries(REPORTS).map(([k, r]) => `<a class="report-card" href="#/relatorio/${k}">${I[r.icon]}<div class="txt"><b>${r.t}</b><p>${r.d}</p></div><span class="go">${I.chev}</span></a>`).join('')}</div>`,
     };
   }
   function viewRelatorio(tipo) {
